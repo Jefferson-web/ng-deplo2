@@ -1,0 +1,42 @@
+.add-photo {
+    width: 150px;
+    height: 150px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    border: 2px solid #ec4899;
+    color: #ec4899;
+    background: #fad3e7;
+    gap: 10px;
+    cursor: pointer;
+    margin: auto;
+}
+
+.gallery .item{
+    display: grid;
+    grid-template-columns: 2fr 3fr 40px;
+    gap: 10px;
+    margin-bottom: 10px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
+}
+
+.gallery .item img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.gallery .item .name{
+    font-size: 12px;
+    font-weight: 500;
+    margin-bottom: 1rem;
+    margin-top: 1rem;
+}
+
+.gallery .item .size{
+    width: 100%;
+    height: 100%;
+    font-size: 10px;
+}
