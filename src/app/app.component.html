@@ -136,7 +136,7 @@
 
             <div class="d-flex flex-column gap-2 mb-3">
                 <label for="txtAtenciones">Atiendo a:</label>
-                <p-multiSelect 
+<!--                 <p-multiSelect 
                     id="txtAtenciones" 
                     formControlName="atenciones"
                     [options]="items" 
@@ -148,7 +148,10 @@
                     placeholder="Seleccionar"
                     (onSelectAllChange)="onSelectAllChange($event)" 
                     (onChange)="onChangeMultiselect($event)"
-                    [style]="{'width': '100%'}"></p-multiSelect>
+                    [style]="{'width': '100%'}"></p-multiSelect> -->
+                    <div class="card flex justify-content-center">
+                        <p-listbox [options]="items" formControlName="atenciones" optionLabel="label" [style]="{'width':'15rem'}" [multiple]="true" [metaKeySelection]="false" [listStyle]="{'max-height': '220px'}"></p-listbox>
+                    </div>
             </div>
 
             <label for="">Servicios</label>

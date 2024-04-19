@@ -24,6 +24,8 @@ import { InputNumberModule } from 'primeng/inputnumber';
 import { CardModule } from 'primeng/card';
 import { MenuModule } from 'primeng/menu';
 import { ToastModule } from 'primeng/toast';
+import { ListboxModule } from 'primeng/listbox';
+
 @NgModule({
   declarations: [
     AppComponent
@@ -53,7 +55,8 @@ import { ToastModule } from 'primeng/toast';
     InputNumberModule,
     CardModule,
     MenuModule,
-    ToastModule
+    ToastModule,
+    ListboxModule
   ],
   providers: [],
   bootstrap: [AppComponent]
