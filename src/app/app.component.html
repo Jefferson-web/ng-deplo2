@@ -90,7 +90,7 @@
                 </div>
             </div>
 
-            <input type="file" #fileInput (change)="onChange($event)" multiple style="display: none;">
+            <input type="file" #fileInput (change)="onChange($event)" multiple style="display: none;" accept="image/*">
             
             <label for="txtAtenciones" class="d-block mb-3">Fotos</label>
             <div class="add-photo mb-3" (click)="activarInputFile()">
