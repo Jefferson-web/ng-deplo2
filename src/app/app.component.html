@@ -98,73 +98,27 @@
                 <div>Agregar foto</div>
             </div>
 
-
-
-            <!-- <div class="gallery mb-3">
-                <div *ngFor="let imagen of imagenes;let i = index" class="item">
-                    <p-image [src]="imagen.url" [previewImageSrc]="imagen.url" alt="Image" width="100%" [preview]="true"></p-image>
-                    <div class="details">
-                        <div class="name">
-                            {{ imagen.file.name }}
-                        </div>
-                        <div class="size">
-                            {{ imagen.file.size / 1024 }} KB
-                        </div>
-                    </div>
-                    <div class="d-flex align-items-center">
-                        <p-button 
-                            icon="pi pi-trash" 
-                            [rounded]="true" 
-                            [text]="true"
-                            (click)="eliminarImagen(i)"></p-button>
-                    </div>
-                </div>
-            </div> -->
-
-
-            <!-- <div class="card custom-shadow mb-3" *ngFor="let imagen of imagenes">
-                <div class="row g-0">
-                    <div class="col-4">
-                        <img [src]="imagen.url" class="img-fluid rounded-start">
-                    </div>
-                    <div class="col-8">
-                        <div class="card-body">
-                            <h5 class="card-title">{{ imagen.file.name }}</h5>
-                        <p class="card-text">{{ imagen.file.size / 1024 }} KB</p>
-                        </div>
-                    </div>
-                </div>
-            </div> -->
-
             <div class="row">
-                <div class="col-12 col-sm-4 col-md-3" *ngFor="let imagen of imagenes">
+                <div class="col-12 col-sm-4 col-md-3" *ngFor="let imagen of imagenes; let i = index">
                     <div class="image">
                         <img [src]="imagen.url" data-scroll-zoom />
                         @if(imagen.selected){
                             <i class="pi pi-star-fill main-photo" style="font-size: 1.5rem"></i>
                         } @else {
                             <i class="pi pi-star main-photo" style="font-size: 1.5rem"></i>
-
                         }
+                        <p-button 
+                            icon="pi pi-times" 
+                            class="delete-img-button" 
+                            [rounded]="true" 
+                            severity="danger"
+                            (click)="confirm2($event, i)"></p-button>
                     </div>
                 </div>
             </div>
 
             <div class="d-flex flex-column gap-2 mb-3">
                 <label for="txtAtenciones">Atiendo a:</label>
-<!--                 <p-multiSelect 
-                    id="txtAtenciones" 
-                    formControlName="atenciones"
-                    [options]="items" 
-                    [showToggleAll]="false" 
-                    [selectAll]="selectAll"
-                    optionLabel="label" [virtualScroll]="true" 
-                    [filter]="false" [virtualScrollItemSize]="43"
-                    class="multiselect-custom-virtual-scroll" 
-                    placeholder="Seleccionar"
-                    (onSelectAllChange)="onSelectAllChange($event)" 
-                    (onChange)="onChangeMultiselect($event)"
-                    [style]="{'width': '100%'}"></p-multiSelect> -->
                     <div class="card flex justify-content-center">
                         <p-listbox [options]="items" formControlName="atenciones" optionLabel="label" [style]="{'width':'15rem'}" [multiple]="true" [metaKeySelection]="false" [listStyle]="{'max-height': '220px'}"></p-listbox>
                     </div>
@@ -247,4 +201,4 @@
 </div>
 
 <router-outlet></router-outlet>
-
+<p-confirmDialog></p-confirmDialog>

@@ -26,6 +26,7 @@ import { MenuModule } from 'primeng/menu';
 import { ToastModule } from 'primeng/toast';
 import { ListboxModule } from 'primeng/listbox';
 import { LightgalleryModule } from 'lightgallery/angular';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
 
 @NgModule({
   declarations: [
@@ -58,7 +59,8 @@ import { LightgalleryModule } from 'lightgallery/angular';
     MenuModule,
     ToastModule,
     ListboxModule,
-    LightgalleryModule
+    LightgalleryModule,
+    ConfirmDialogModule
   ],
   providers: [],
   bootstrap: [AppComponent]

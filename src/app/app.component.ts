@@ -1,7 +1,7 @@
 import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 import { Editor, Validators } from 'ngx-editor';
-import { MenuItem, MessageService } from 'primeng/api';
+import { ConfirmationService, MenuItem, MessageService } from 'primeng/api';
 
 export interface Image {
   url: string | ArrayBuffer;
@@ -27,7 +27,7 @@ export interface Anuncio {
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
-  providers: [MessageService]
+  providers: [ConfirmationService, MessageService]
 })
 export class AppComponent implements OnInit, OnDestroy {
 
@@ -48,7 +48,7 @@ export class AppComponent implements OnInit, OnDestroy {
     }
   ];
 
-  eliminarTarifa(i: number){
+  eliminarTarifa(i: number) {
     this.tarifas.removeAt(i);
   }
 
@@ -82,7 +82,7 @@ export class AppComponent implements OnInit, OnDestroy {
   salidasSeleccionadas: any[] = [];
 
 
-  constructor(private fb: FormBuilder, private messageService: MessageService) {
+  constructor(private fb: FormBuilder, private messageService: MessageService, private confirmationService: ConfirmationService) {
 
   }
 
@@ -213,7 +213,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
   onChange(event: any) {
     const files = event.target.files;
-    if(files.length > 0){
+    if (files.length > 0) {
       const component = this;
       for (const file of files) {
         var reader = new FileReader();
@@ -221,7 +221,7 @@ export class AppComponent implements OnInit, OnDestroy {
           const image: Image = {
             url: evt.target.result,
             file: file,
-            selected: component.imagenes.length == 0 ? true: false
+            selected: component.imagenes.length == 0 ? true : false
           };
           component.imagenes.push(image);
         };
@@ -255,6 +255,23 @@ export class AppComponent implements OnInit, OnDestroy {
   onChangeMultiselect(event: any) {
     const { originalEvent, value } = event
     if (value) this.selectAll = value.length === this.items.length;
+  }
+
+  confirm2(event: Event, i: number) {
+    this.confirmationService.confirm({
+      target: event.target as EventTarget,
+      message: 'Quieres eliminar la imagen?',
+      header: 'unknown.com',
+      icon: 'pi pi-info-circle',
+      acceptButtonStyleClass: "p-button-danger p-button-text",
+      rejectButtonStyleClass: "p-button-text p-button-text",
+      acceptIcon: "none",
+      rejectIcon: "none",
+      acceptLabel: "Si",
+      accept: () => {
+        this.eliminarImagen(i);
+      }
+    });
   }
 
 }
