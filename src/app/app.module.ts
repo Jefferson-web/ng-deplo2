@@ -25,6 +25,7 @@ import { CardModule } from 'primeng/card';
 import { MenuModule } from 'primeng/menu';
 import { ToastModule } from 'primeng/toast';
 import { ListboxModule } from 'primeng/listbox';
+import { LightgalleryModule } from 'lightgallery/angular';
 
 @NgModule({
   declarations: [
@@ -56,7 +57,8 @@ import { ListboxModule } from 'primeng/listbox';
     CardModule,
     MenuModule,
     ToastModule,
-    ListboxModule
+    ListboxModule,
+    LightgalleryModule
   ],
   providers: [],
   bootstrap: [AppComponent]

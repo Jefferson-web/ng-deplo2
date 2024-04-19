@@ -98,6 +98,8 @@
                 <div>Agregar foto</div>
             </div>
 
+
+
             <!-- <div class="gallery mb-3">
                 <div *ngFor="let imagen of imagenes;let i = index" class="item">
                     <p-image [src]="imagen.url" [previewImageSrc]="imagen.url" alt="Image" width="100%" [preview]="true"></p-image>
@@ -120,7 +122,7 @@
             </div> -->
 
 
-            <div class="card custom-shadow mb-3" *ngFor="let imagen of imagenes">
+            <!-- <div class="card custom-shadow mb-3" *ngFor="let imagen of imagenes">
                 <div class="row g-0">
                     <div class="col-4">
                         <img [src]="imagen.url" class="img-fluid rounded-start">
@@ -130,6 +132,20 @@
                             <h5 class="card-title">{{ imagen.file.name }}</h5>
                         <p class="card-text">{{ imagen.file.size / 1024 }} KB</p>
                         </div>
+                    </div>
+                </div>
+            </div> -->
+
+            <div class="row">
+                <div class="col-12 col-sm-4 col-md-3" *ngFor="let imagen of imagenes">
+                    <div class="image">
+                        <img [src]="imagen.url" data-scroll-zoom />
+                        @if(imagen.selected){
+                            <i class="pi pi-star-fill main-photo" style="font-size: 1.5rem"></i>
+                        } @else {
+                            <i class="pi pi-star main-photo" style="font-size: 1.5rem"></i>
+
+                        }
                     </div>
                 </div>
             </div>
@@ -231,3 +247,4 @@
 </div>
 
 <router-outlet></router-outlet>
+

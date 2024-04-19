@@ -6,6 +6,7 @@ import { MenuItem, MessageService } from 'primeng/api';
 export interface Image {
   url: string | ArrayBuffer;
   file: File;
+  selected: boolean;
 }
 
 export interface Anuncio {
@@ -212,20 +213,21 @@ export class AppComponent implements OnInit, OnDestroy {
 
   onChange(event: any) {
     const files = event.target.files;
-    const component = this;
-    for (const file of files) {
-      var reader = new FileReader();
-      reader.onload = function (evt) {
-        const image: Image = {
-          url: evt.target.result,
-          file: file
+    if(files.length > 0){
+      const component = this;
+      for (const file of files) {
+        var reader = new FileReader();
+        reader.onload = function (evt) {
+          const image: Image = {
+            url: evt.target.result,
+            file: file,
+            selected: component.imagenes.length == 0 ? true: false
+          };
+          component.imagenes.push(image);
         };
-        component.imagenes.push(image);
-      };
-
-      reader.readAsDataURL(file);
+        reader.readAsDataURL(file);
+      }
     }
-    console.log(this.imagenes);
   }
 
   eliminarImagen(i: number) {
