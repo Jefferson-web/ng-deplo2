@@ -27,10 +27,15 @@ import { ToastModule } from 'primeng/toast';
 import { ListboxModule } from 'primeng/listbox';
 import { LightgalleryModule } from 'lightgallery/angular';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { AnunciosComponent } from './components/anuncios/anuncios.component';
+import { CrearAnuncioComponent } from './components/crear-anuncio/crear-anuncio.component';
+import { TagModule } from 'primeng/tag';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    AnunciosComponent,
+    CrearAnuncioComponent
   ],
   imports: [
     BrowserModule,
@@ -60,7 +65,8 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
     ToastModule,
     ListboxModule,
     LightgalleryModule,
-    ConfirmDialogModule
+    ConfirmDialogModule,
+    TagModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,0 +1,37 @@
+<div class="card flex justify-content-center">
+    <p-card class="ad" [style]="{ width: '100%' }">
+        <div class="ad-header">
+            <div>
+                <p-tag severity="success" class="ad-tag" value="Publicado"></p-tag>
+            </div>
+            <div class="options">
+                <p-toast></p-toast>
+                <p-menu #menu [model]="items" [popup]="true"></p-menu>
+                <p-button
+                    icon="pi pi-ellipsis-v" 
+                    (click)="menu.toggle($event)" 
+                    [rounded]="true" [text]="true" 
+                    severity="secondary"
+                    [style]="{'margin-left': 'auto'}"></p-button>
+            </div>
+        </div>
+        <div class="ad-body">
+            <div class="p-card-title ng-star-inserted">
+                Camila
+            </div>
+            <div class="p-card-subtitle ng-star-inserted my-4">
+                Publicado el 19/04/2024
+            </div>
+            <p>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore sed consequuntur...
+            </p>
+            <!-- <ng-template pTemplate="footer">
+                <p-button label="Save" icon="pi pi-check"></p-button>
+                <p-button label="Cancel" icon="pi pi-times" styleClass="p-button-secondary"
+                    [style]="{ 'margin-left': '.5em' }"></p-button>
+            </ng-template> -->
+        </div>
+    </p-card>
+</div>
+
+

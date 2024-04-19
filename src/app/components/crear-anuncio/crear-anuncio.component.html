@@ -1,0 +1,203 @@
+<div class="container my-4">
+    <form [formGroup]="adForm" (submit)="onSubmit();">
+        <div class="col-12">
+
+            <h2>Crear Anuncio</h2>
+            <div class="d-flex flex-column gap-2 mb-3">
+                <label for="txtTitulo">Título</label>
+                <input 
+                    pInputText id="txtTitulo" 
+                    autocomplete="off"
+                    formControlName="titulo" />
+            </div>
+            <div class="d-flex flex-column gap-2 mb-3">
+                <label for="txtDescripcion">Descripción</label>
+                <div class="card">
+                    <p-editor [style]="{ height: '320px' }" 
+                        id="txtDescripcion"
+                        formControlName="descripcion">
+                        <ng-template pTemplate="header">
+                            <span class="ql-formats">
+                                <button type="button" class="ql-bold" aria-label="Bold"></button>
+                                <button type="button" class="ql-italic" aria-label="Italic"></button>
+                                <button type="button" class="ql-underline" aria-label="Underline"></button>
+                            </span>
+                        </ng-template>
+                    </p-editor>
+                </div>
+            </div>
+            <div class="d-flex flex-column gap-2 mb-3">
+                <label for="txtNombre">Nombre</label>
+                <input pInputText 
+                    id="txtNombre" 
+                    autocomplete="off"
+                    formControlName="nombre" />
+            </div>
+            
+            <label for="txtNacionalidad">Sexo</label>
+            <div class="d-flex flex-wrap gap-3 mb-3">
+                <div class="d-flex align-items-center">
+                    <p-radioButton formControlName="genero" name="genero" value="Mujer" inputId="ingredient1">
+                    </p-radioButton>
+                    <label for="ingredient1" class="m-2">Mujer</label>
+                </div>
+
+                <div class="d-flex align-items-center">
+                    <p-radioButton formControlName="genero" name="genero" value="Hombre" inputId="ingredient2">
+                    </p-radioButton>
+                    <label for="ingredient2" class="m-2">Hombre</label>
+                </div>
+
+                <div class="d-flex align-items-center">
+                    <p-radioButton formControlName="genero" name="genero" value="Trans" inputId="ingredient3">
+                    </p-radioButton>
+                    <label for="ingredient3" class="m-2">Trans</label>
+                </div>
+            </div>
+
+            <div class="d-flex flex-column gap-2 mb-3">
+                <label for="txtNacionalidad">Nacionalidad</label>
+                <p-dropdown 
+                    [options]="cities" 
+                    optionLabel="name" 
+                    placeholder="Seleccionar" 
+                    [style]="{'width': '100%'}"
+                    id="txtNacionalidad"
+                    formControlName="nacionalidad"></p-dropdown>
+            </div>
+
+            <div class="row">
+                <div class="col-4">
+                    <div class="d-flex flex-column gap-2 mb-3">
+                        <label for="txtEdad">Edad</label>
+                        <input 
+                            pInputText id="txtEdad" 
+                            autocomplete="off" 
+                            formControlName="edad" />
+                    </div>
+                </div>
+
+                <div class="col-8">
+                    <div class="d-flex flex-column gap-2 mb-3">
+                        <label for="txtCelular">Celular</label>
+                        <p-inputMask 
+                            type="phone" id="txtCelular" 
+                            [style]="{'width': '100%'}" 
+                            mask="999-999-999"
+                            placeholder="999-999-999"
+                            formControlName="celular"></p-inputMask>
+                    </div>
+                </div>
+            </div>
+
+            <input type="file" #fileInput (change)="onChange($event)" multiple style="display: none;" accept="image/*">
+            
+            <label for="txtAtenciones" class="d-block mb-3">Fotos</label>
+            <div class="add-photo mb-3" (click)="activarInputFile()">
+                <i class="pi pi-camera" style="font-size: 2rem"></i>
+                <div>Agregar foto</div>
+            </div>
+
+            <div class="row">
+                <div class="col-12 col-sm-4 col-md-3" *ngFor="let imagen of imagenes; let i = index">
+                    <div class="image">
+                        <img [src]="imagen.url" data-scroll-zoom />
+                        @if(imagen.selected){
+                            <i class="pi pi-star-fill main-photo" style="font-size: 1.5rem"></i>
+                        } @else {
+                            <i class="pi pi-star main-photo" style="font-size: 1.5rem"></i>
+                        }
+                        <p-button 
+                            icon="pi pi-times" 
+                            class="delete-img-button" 
+                            [rounded]="true" 
+                            severity="danger"
+                            (click)="confirm2($event, i)"></p-button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="d-flex flex-column gap-2 mb-3">
+                <label for="txtAtenciones">Atiendo a:</label>
+                    <div class="card flex justify-content-center">
+                        <p-listbox [options]="items" formControlName="atenciones" optionLabel="label" [style]="{'width':'15rem'}" [multiple]="true" [metaKeySelection]="false" [listStyle]="{'max-height': '220px'}"></p-listbox>
+                    </div>
+            </div>
+
+            <label for="">Servicios</label>
+            <br><br>
+            <div class="d-flex flex-wrap justify-content-center gap-3 mb-3">
+                <p-toggleButton 
+                    *ngFor="let servicio of servicios" 
+                    [onLabel]="servicio.label" 
+                    [offLabel]="servicio.label"
+                    (onChange)="onServicioSeleccionado($event, servicio)" />
+            </div>
+
+            <label for="">Salidas a</label>
+            <br><br>
+            <div class="d-flex flex-wrap justify-content-center gap-3">
+                <p-toggleButton 
+                    *ngFor="let salida of salidas" 
+                    [onLabel]="salida.label" 
+                    [offLabel]="salida.label"
+                    (onChange)="onSalidaSeleccionada($event, salida)" />
+            </div>
+
+            <label for="">Tarifas</label>
+            <br><br>
+
+            <ng-container formArrayName="tarifas">
+                <ng-container *ngFor="let tarifaForm of tarifas.controls; let i = index">
+                    <div class="row mb-3 d-flex align-items-center" [formGroupName]="i">
+                        <div class="col-6" style="padding-right: 5px;">
+                            <input class="p-inputtext-sm" pInputText formControlName="nombre" autocomplete="off"
+                                [style]="{'width': '100%'}" placeholder="Nombre" />
+                        </div>
+                        <div class="col-5 d-flex align-items-center" style="display: inline-flexbox;text-align: center; padding-left: 5px;padding-right: 5px;">
+                            <p-inputNumber 
+                                class="p-inputtext-sm d-flex justify-content-center" 
+                                inputId="currency" 
+                                prefix="S/ " 
+                                [style]="{'width': '100%'}"
+                                formControlName="precio">
+                            </p-inputNumber>
+                        </div>
+                        <div class="col-1 d-flex justify-content-center">
+                            <p-button 
+                                icon="pi pi-times" 
+                                [rounded]="true" 
+                                [text]="true" 
+                                severity="danger"
+                                (click)="eliminarTarifa(i)"></p-button>
+                        </div>
+                    </div>
+                </ng-container>
+                <div class="d-flex justify-content-center">
+                    <p-button
+                    label="Agregar +" 
+                    [text]="true"
+                    size="small" 
+                    (click)="agregarTarifa()"
+                    [style]="{'margin-bottom': '1rem'}"></p-button>
+                </div>
+            </ng-container>
+        </div>
+        <div class="mb-3">
+            <p-button 
+                type="submit"
+                label="Crear Anuncio" 
+                [rounded]="true" 
+                [style]="{'width': '100%'}"></p-button>
+        </div>
+        <div class="mb-3">
+            <p-button 
+                label="Salir" 
+                [rounded]="true" 
+                severity="secondary"
+                [style]="{'width': '100%'}"></p-button>
+        </div>
+    </form>
+</div>
+
+<p-confirmDialog></p-confirmDialog>
