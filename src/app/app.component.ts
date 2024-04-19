@@ -47,6 +47,10 @@ export class AppComponent implements OnInit, OnDestroy {
     }
   ];
 
+  eliminarTarifa(i: number){
+    this.tarifas.removeAt(i);
+  }
+
   salidas: any[] = [
     {
       value: '1',
