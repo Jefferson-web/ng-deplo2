@@ -1,6 +1,7 @@
 import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 import { Editor, Validators } from 'ngx-editor';
+import { MenuItem, MessageService } from 'primeng/api';
 
 export interface Image {
   url: string | ArrayBuffer;
@@ -24,12 +25,13 @@ export interface Anuncio {
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
+  styleUrl: './app.component.scss',
+  providers: [MessageService]
 })
 export class AppComponent implements OnInit, OnDestroy {
 
   @ViewChild('fileInput') fileInput!: ElementRef<HTMLInputElement>;
-
+  items2: MenuItem[] | undefined;
   servicios: any[] = [
     {
       value: '1',
@@ -67,7 +69,7 @@ export class AppComponent implements OnInit, OnDestroy {
     }
   ];
 
-  activarInputFile(){
+  activarInputFile() {
     this.fileInput.nativeElement.click();
   }
 
@@ -75,7 +77,7 @@ export class AppComponent implements OnInit, OnDestroy {
   salidasSeleccionadas: any[] = [];
 
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private messageService: MessageService) {
 
   }
 
@@ -142,6 +144,50 @@ export class AppComponent implements OnInit, OnDestroy {
       precio: ['', Validators.required]
     });
     this.tarifas.push(tarifaForm);
+    this.items2 = [
+      {
+        label: 'Options',
+        items: [
+          {
+            label: 'Update',
+            icon: 'pi pi-refresh',
+            command: () => {
+              this.update();
+            }
+          },
+          {
+            label: 'Delete',
+            icon: 'pi pi-times',
+            command: () => {
+              this.delete();
+            }
+          }
+        ]
+      },
+      {
+        label: 'Navigate',
+        items: [
+          {
+            label: 'Angular',
+            icon: 'pi pi-external-link',
+            url: 'http://angular.io'
+          },
+          {
+            label: 'Router',
+            icon: 'pi pi-upload',
+            routerLink: '/fileupload'
+          }
+        ]
+      }
+    ];
+  }
+
+  update() {
+    this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Data Updated' });
+  }
+
+  delete() {
+    this.messageService.add({ severity: 'warn', summary: 'Delete', detail: 'Data Deleted' });
   }
 
   agregarTarifa() {
@@ -183,7 +229,7 @@ export class AppComponent implements OnInit, OnDestroy {
     this.fileInput.nativeElement.value = "";
   }
 
-  items = [
+  items: any[] = [
     { label: 'Hombres', value: 'Hombres' },
     { label: 'Mujeres', value: 'Mujeres' },
     { label: 'Parejas', value: 'Parejas' },

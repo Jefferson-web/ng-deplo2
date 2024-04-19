@@ -22,7 +22,8 @@ import { InputGroupAddonModule } from 'primeng/inputgroupaddon';
 import { AutoFocusModule } from 'primeng/autofocus';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { CardModule } from 'primeng/card';
-
+import { MenuModule } from 'primeng/menu';
+import { ToastModule } from 'primeng/toast';
 @NgModule({
   declarations: [
     AppComponent
@@ -50,7 +51,9 @@ import { CardModule } from 'primeng/card';
     InputGroupAddonModule,
     AutoFocusModule,
     InputNumberModule,
-    CardModule
+    CardModule,
+    MenuModule,
+    ToastModule
   ],
   providers: [],
   bootstrap: [AppComponent]
